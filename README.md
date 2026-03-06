@@ -32,6 +32,7 @@
 우리가 분석하는 모델은 아래와 같이 7가지 핵심 요소로 구성된 반도체 뚜껑(IHS) 패키지입니다.    
 
 <img width="424" height="292" alt="패키지 파트 명칭" src="https://github.com/user-attachments/assets/dcc27cd0-dead-4fa4-8917-469e909672ac" />        
+
 <Fig.2 플립칩 모델링>        
 
 ![Code_Generated_Image(1)](https://github.com/user-attachments/assets/c45c9924-063d-4268-9028-428af591cb4c)       
