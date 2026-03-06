@@ -27,7 +27,7 @@
 
 ![images](https://github.com/user-attachments/assets/20b24c1f-3e37-430e-bfe3-985b92d31987)
 
-<img width="212" height="146" alt="패키지 파트 명칭" src="https://github.com/user-attachments/assets/dcc27cd0-dead-4fa4-8917-469e909672ac" />
+<img width="636" height="438" alt="패키지 파트 명칭" src="https://github.com/user-attachments/assets/dcc27cd0-dead-4fa4-8917-469e909672ac" />
 
 ![Code_Generated_Image(1)](https://github.com/user-attachments/assets/c45c9924-063d-4268-9028-428af591cb4c)
 
