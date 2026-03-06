@@ -3,6 +3,12 @@
 ## 반도체가 열변형에 의해 휘어지고 깨지고 뜯어지는 것을 ai로 예측합니다.
 <br>
 
+### 0. 키워드 설명
+
+CAE (Computer-Aided Engineering)란 무엇인지?    
+flipchip이 무엇인지?    
+Pinn, 왜 변형되면 안되는지    
+
 ### 1. 프로젝트 개요
 
 반도체 패키지는 서로 다른 성질의 재료들이 겹겹이 쌓인 '초정밀 샌드위치'입니다. 열을 받으면 각 재료의 팽창 속도가 달라 두 가지 치명적인 문제가 발생합니다.
@@ -31,7 +37,8 @@
 ### 3. 반도체 '샌드위치' 구조 (The Subject)
 우리가 분석하는 모델은 아래와 같이 7가지 핵심 요소로 구성된 반도체 뚜껑(IHS) 패키지입니다.    
 
-<img width="424" height="292" alt="패키지 파트 명칭" src="https://github.com/user-attachments/assets/dcc27cd0-dead-4fa4-8917-469e909672ac" />        
+<img width="424" height="256" alt="패키지 파트 명칭" src="https://github.com/user-attachments/assets/f6b73ab8-4a27-4991-9543-82d2a14c60aa" />
+       
 
 <Fig.2 플립칩 모델링 파트 설명>        
 
