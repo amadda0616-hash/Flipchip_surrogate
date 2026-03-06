@@ -33,6 +33,7 @@
 
 <img width="424" height="292" alt="패키지 파트 명칭" src="https://github.com/user-attachments/assets/dcc27cd0-dead-4fa4-8917-469e909672ac" />        
 <Fig.2 플립칩 모델링>        
+
 ![Code_Generated_Image(1)](https://github.com/user-attachments/assets/c45c9924-063d-4268-9028-428af591cb4c)       
 <Fig.3 플립칩 단순화 모델 이미지>    
 > 딥러닝에 유의미한 데이터를 모으기 위해 최대한 조건과 형상을 단순화 합니다. 실제 논문의 경우 3d 형상과 복잡한 조건으로 슈퍼컴퓨터를 사용합니다.
