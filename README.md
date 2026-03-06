@@ -29,7 +29,9 @@
 
 ![Code_Generated_Image(1)](https://github.com/user-attachments/assets/c45c9924-063d-4268-9028-428af591cb4c)
 
+![image.png](attachment:image.png)
 
+> 딥러닝에 유의미한 데이터를 모으기 위해 최대한 조건과 형상을 단순화 합니다. 실제 논문의 경우 3d 형상과 복잡한 조건으로 슈퍼컴퓨터를 사용합니다.
 
 
 
