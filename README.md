@@ -35,7 +35,7 @@ Pinn, 왜 변형되면 안되는지
 <Fig.1 플립칩 모형 단면>     
 
 ### 3. 반도체 '샌드위치' 구조 (The Subject)
-우리가 분석하는 모델은 아래와 같이 7가지 핵심 요소로 구성된 반도체 뚜껑(IHS) 패키지입니다.    
+우리가 분석하는 모델은 아래와 같이 6가지 핵심 요소로 구성된 Lidded Package (뚜껑이 있는 패키지,Lidded FCBGA (Flip-Chip Ball Grid Array))입니다.    
 
 <img width="424" height="256" alt="패키지 파트 명칭" src="https://github.com/user-attachments/assets/f6b73ab8-4a27-4991-9543-82d2a14c60aa" />
        
