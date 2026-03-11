@@ -1,0 +1,43 @@
+sdv 대신 사용할 GMM 코드
+import pandas as pd
+import numpy as np
+from sklearn.mixture import GaussianMixture
+
+# == 6-1 대체 코드 ==
+# 1. 모델 학습 (원본 데이터 df 사용)
+# n_components가 너무 높으면 뿔이 생기니 10 정도가 적당합니다.
+gmm = GaussianMixture(n_components=10, covariance_type='full', random_state=42)
+gmm.fit(df)
+
+# 2. 증강 데이터 생성
+gen_data, _ = gmm.sample(len(df) * 2) 
+df_aug = pd.DataFrame(gen_data, columns=df.columns)
+
+# 3. 분포 비교 시각화 (기존 코드와 동일)
+# ... sns.kdeplot(df['col']) ...
+
+========================== or ====================================
+
+
+import pandas as pd
+import numpy as np
+from sklearn.mixture import GaussianMixture
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# 1. GMM 모델 학습 (sdv 대신 사용 권장)
+# n_components를 조절하여 원본과 가장 비슷한 부드러운 곡선을 찾으세요.
+gmm = GaussianMixture(n_components=10, covariance_type='full', random_state=42)
+gmm.fit(df)  # df는 원본 데이터
+
+# 2. 증강 데이터 생성
+n_samples = len(df) * 2
+augmented_data, _ = gmm.sample(n_samples)
+df_augmented = pd.DataFrame(augmented_data, columns=df.columns)
+
+# 3. 분포 비교 확인
+plt.figure(figsize=(10, 5))
+sns.kdeplot(df['주요변수'], label='Original', color='blue')
+sns.kdeplot(df_augmented['주요변수'], label='Augmented', color='orange')
+plt.legend()
+plt.show()
