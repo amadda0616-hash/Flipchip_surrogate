@@ -55,6 +55,7 @@
 우리가 분석하는 모델은 아래와 같이 6가지 핵심 요소로 구성된 Lidded Package (뚜껑이 있는 패키지, Lidded FCBGA (Flip-Chip Ball Grid Array))입니다.   
 
 ![images](https://github.com/user-attachments/assets/20b24c1f-3e37-430e-bfe3-985b92d31987)
+
 <Fig.1 플립칩 모형 단면>     
 
 ![06  플립칩 명칭](https://cdn.discordapp.com/attachments/1480386986840953003/1483427913738223697/AOI_d_96C3Edfqp7PVvExr_RW74EtvfmI4UX_5SJop7CyxYJi-SEfL-4A3a99BgS7VlCbTBFH3D84Rt0qjDilCNtf0Uy2uDmykjY70yK3jUGp2TjxBbQVM8quFw-SOAZ8lvFdiTbBXu_fhP-IPzwcS1SfSSKRM7t8gqxjEPlNrlKs_aN0FDiJgs1600-rj.png?ex=69ba8d67&is=69b93be7&hm=a5eeb0dcabed210ef7d837e1ba0467ca44b890db7e1abfd634a975778a6f5675&)
