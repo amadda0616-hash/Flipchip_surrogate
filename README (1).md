@@ -7,7 +7,7 @@
 
 ### 1) CAE (Computer-Aided Engineering)란 무엇인지?
 
-![01  CAE란_2](https://github.com/user-attachments/assets/a42065d8-5f65-43a8-8534-10a495136957)
+![01  CAE란_2](https://cdn.discordapp.com/attachments/1480386986840953003/1483416644498886676/AOI_d_-Z-yEFpxJf0VFEK67ntE3JZvsO5JRVQZM6Tc2AxlOl1HvUA35RFxid-tM-yuc7cUxECSs4_QaWi9SNhXmF5HF0P5JJaF1H1q5R8jh_Xf-2cmzmh7jV1U-VzYqz0MXR33CtG3pfq55FkrOMRnhLr5V2XLUtDmJSQLs9mR6mNApkeQlKs1600-rj.png?ex=69ba82e8&is=69b93168&hm=b824ab711a42f3ef2c7567923acb24954bbcff67fd4142c6f6bd732b7dc567dc&)
 
 ### 2) flipchip이 무엇인지?
  
