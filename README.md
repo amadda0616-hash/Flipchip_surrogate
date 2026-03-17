@@ -119,10 +119,6 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
 | | `B_Avg_Shear` | 하단 계면 평균 전단 응력 | 하단 전체 전단 하중 수준 |
 | **부품 파손** | `Die_SX` | 다이 중심 굽힘 응력 (MPa) | Die Crack 방지용 굽힘 응력 ($\sigma_x$) |
 
-<img width="1164" height="1600" alt="Sim 01 결과 그래프" src="https://github.com/user-attachments/assets/f46c6022-bece-4189-a28b-2f35ff3e8896" />
-
-<Fig.3 케이스 1 - 임의 설계 치수 기준 stpe 별 수치 그래프>
-
 ### 6. CAE 데이터 구현 과정
 
 a. 3D 혹은 Fan에 의한 유동 해석 등이 포함되면 한개의 케이스 당 몇 시간씩 걸리게 됩니다.    
@@ -154,20 +150,7 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 
 <img width="1164" height="1600" alt="Sim 01 결과 그래프" src="https://github.com/user-attachments/assets/f46c6022-bece-4189-a28b-2f35ff3e8896" />
 
-<Fig.4 케이스 1 - 임의 설계 치수 기준 stpe 별 수치 그래프>
-
-<img width="1360" height="907" alt="directional deformation 300s" src="https://github.com/user-attachments/assets/d4de256f-3acb-4a74-a767-4ad4d5c130ad" />
-
-<Fig.5 300s 냉각 이후 deformation>
-
-<img width="1431" height="907" alt="normal stress 179s" src="https://github.com/user-attachments/assets/a1f587a5-9937-49db-a192-9df13d0aef5c" />
-
-<Fig.6 step2 발열 시점 normal stress>
-
-<img width="1431" height="907" alt="normal stress 300s" src="https://github.com/user-attachments/assets/4702cb27-7850-40f7-ad65-6cdb57331af5" />
-
-<Fig.7 step3 냉각 시점 normal stress>
-
+<Fig.3 케이스 1 - 임의 설계 치수 기준 stpe 별 수치 그래프>
 
 # 8. 📊 22-Column Simulation Dataset 정의서
 
