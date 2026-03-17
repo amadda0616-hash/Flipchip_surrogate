@@ -35,12 +35,12 @@
 
 ## 1. 프로젝트 레퍼런스
 
-최근 반도체 패키징 분야에서는 유한요소해석(FEA)의 막대한 연산 비용을 극복하기 위해 심층신경망(DNN)을 활용한 휨(Warpage) 예측 연구[1]와 트리 기반 머신러닝을 적용한 열응력/방열 최적화 연구[2]가 활발히 진행되고 있으며,     
-복잡한 물리적 비선형성을 정밀하게 학습하기 위해 CNN 기반의 데이터 주도형 모델링 기법도 도입되고 있습니다[3].      
+최근 반도체 패키징 분야에서는 **유한요소해석(FEA)의 막대한 연산 비용을 극복하기 위해 심층신경망(DNN)을 활용**한 휨(Warpage) 예측 연구[1]와 **트리 기반 머신러닝을 적용한 열응력/방열 최적화** 연구[2]가 활발히 진행되고 있으며,     
+복잡한 물리적 비선형성을 정밀하게 학습하기 위해 **CNN 기반의 데이터 주도형 모델링 기법**도 도입되고 있습니다[3].      
 이와 더불어 솔더 조인트 수명 예측, 설비 잔존 수명(RUL)을 위한 시계열 데이터 생성, 배터리의 기계적 파손 예측 등 공학적 신뢰성 평가 전반에 AI를 적용하는 최신 학계의 융합 연구 흐름[4,5,6]은 본 프로젝트의 방법론적 배경을 넓히는 기반이 되었습니다.     
-본 프로젝트는 이러한 기존의 단순 순방향 예측(Forward Prediction)을 넘어, 가상의 완벽한 응력 상태를 정의한 '유토피아 타겟 텐서(Utopia Tensor)'와 오토인코더의 잠재 공간(Latent Space)을 활용하여 최적 설계의 초안을 즉시 도출하는 역설계(Inverse Design) 파이프라인을 제안합니다.    
-특히 시계열 파동에서 가장 파괴적인 'Max Peak'만을 추출해 학습 효율을 극대화하고, GPR(Gaussian Process Regression)이 산출하는 예측 불확실성($\sigma$)을 유전 알고리즘(NSGA-II)의 강제 제약 조건(Hard Constraint)으로 부여함으로써,     
-AI 특유의 꼼수(Reward Hacking)나 메쉬 붕괴 에러를 원천 차단하는 '제조 가능한 강건 최적화(Robust Optimization)'를 달성한 것이 본 연구의 가장 큰 차별점입니다.    
+본 프로젝트는 이러한 기존의 단순 순방향 예측(Forward Prediction)을 넘어, 가상의 완벽한 응력 상태를 정의한 **'유토피아 타겟 텐서(Utopia Tensor)'**와 오토인코더의 **잠재 공간(Latent Space)**을 활용하여 최적 설계의 초안을 즉시 도출하는 **역설계(Inverse Design)** 파이프라인을 제안합니다.    
+특히 시계열 파동에서 가장 파괴적인 'Max Peak'만을 추출해 학습 효율을 극대화하고, GPR(Gaussian Process Regression)이 산출하는 예측 불확실성($\sigma$)을 **유전 알고리즘(NSGA-II)의 강제 제약 조건(Hard Constraint)**으로 부여함으로써,     
+AI 특유의 꼼수(Reward Hacking)나 메쉬 붕괴 에러를 원천 차단하는 **'제조 가능한 강건 최적화(Robust Optimization)'**를 달성한 것이 본 연구의 가장 큰 차별점입니다.    
       
 References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (2025). Deep Learning Study on Memory IC Package Warpage Using Deep Neural Network and Finite Element Simulation. Chips, 4, 35.    
 [2] Acharya, P. V., Lokanathan, M., Ouroua, A., Hebner, R., Strank, S., & Bahadur, V. (2018). Machine Learning-Based Predictions of Benefits of High Thermal Conductivity Encapsulation Materials for Power Electronics Packaging. Journal of Electronic Packaging, 140(4), 041109.    
