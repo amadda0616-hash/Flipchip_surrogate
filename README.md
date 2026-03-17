@@ -349,8 +349,8 @@ pymoo는 NSGA-II의 진화 루프 + 제약조건 처리 + 비지배 정렬을 �
 복원 품질은 매우 우수한 결과가 나온 것을 볼수 있다.     
 세번째 그래프는 오토인코더의 잠재공간 시각화이다.    
 
-<img width="890" height="578" alt="복원 3" src="https://github.com/user-attachments/assets/12c30326-5918-4907-a117-798de7bf2aad" />
-<img width="885" height="587" alt="복원 2" src="https://github.com/user-attachments/assets/8723f966-fc7d-4a3d-b146-da41512d2bd6" />
+<img width="512" height="339" alt="복원 3" src="https://github.com/user-attachments/assets/12c30326-5918-4907-a117-798de7bf2aad" />
+<img width="512" height="339" alt="복원 2" src="https://github.com/user-attachments/assets/8723f966-fc7d-4a3d-b146-da41512d2bd6" />
 <img width="512" height="339" alt="복원 1" src="https://github.com/user-attachments/assets/b52c4437-9b7a-40d3-94d5-1dfcc585ec85" />
 <Fig 14. 오토인코더 복원 품질 그래프에서 원본 그래프의 3가지 타입>
 
