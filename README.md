@@ -52,7 +52,8 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
    
 ## 2. 프로젝트 개요
 
-![04  프로젝트 개요](https://github.com/user-attachments/assets/6feae6dd-7266-4372-bea2-7047a4df75c9)
+<img width="1380" height="752" alt="04  프로젝트 개요_2" src="https://github.com/user-attachments/assets/f8d7c348-78d1-481c-a2c4-ac434cec3663" />
+
 
 반도체 패키지는 서로 다른 성질의 재료들이 겹겹이 쌓인 '초정밀 샌드위치'입니다. 열을 받으면 각 재료의 팽창 속도가 달라 두 가지 치명적인 문제가 발생합니다.
 
@@ -61,11 +62,13 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
 해결: 이 뒤틀림을 예측하려면 복잡한 물리 계산(시뮬레이션)이 필요한데, 한 번 계산에 시간이 너무 오래 걸립니다. 그래서 우리는 결과를 순식간에 맞추는 AI를 가르치기로 했습니다.    
 <br>                     
 
-![04-1  프로젝트 개요](https://github.com/user-attachments/assets/6e8b63bd-4be3-4fb1-9f0d-f549877fae6c)
+![04-1  프로젝트 개요_2](https://github.com/user-attachments/assets/f9c069b0-ecab-4e7f-96d2-541d1f5b8834)
+
 
 ## 3. 대리 모델의 도입 (The "Surrogate Model" Concept)
 
-![05  대리 모델의 도입](https://github.com/user-attachments/assets/215cd1b9-e564-494a-a393-93f6b7a6efd3)
+![05  대리 모델의 도입_2](https://github.com/user-attachments/assets/96a14396-a356-4238-b592-41d250841162)
+
 
 
 본 프로젝트의 핵심은 복잡하고 오래걸리는 무거운 컴퓨터 시뮬레이션 작업를 대신할 **'대리 모델(Surrogate Model)'**을 구축하는 것입니다.
