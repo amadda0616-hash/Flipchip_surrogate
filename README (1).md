@@ -11,8 +11,7 @@
 
 ### 2) flipchip이 무엇인지?
  
-![02  플립 칩이란](https://github.com/user-attachments/assets/cd8d6bb6-e3c8-49c0-a294-5bbf95eb10b2)
-
+![02  플립 칩이란](https://cdn.discordapp.com/attachments/1480386986840953003/1483417230808186985/image.png?ex=69ba8374&is=69b931f4&hm=c9276ced1f498e1a7283c719ab310a15f11e7a609486d72819a7eecb98ac02e9&)
    플립칩(Flip-Chip)은 반도체 칩을 기판에 연결할 때 칩을 뒤집어(Flip) 표면의 수많은 돌기(Bump)를 기판에 직접 맞닿게 붙이는 연결 기술입니다.
    
    이번 프로젝트는 i9-13900k를 모델로 했고 이 cpu가 플립칩 타입입니다.
