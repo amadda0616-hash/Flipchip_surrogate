@@ -24,6 +24,9 @@
    이번 프로젝트는 제 pc의 cpu인 i9-13900k를 모델로 했고 이 cpu가 플립칩 타입입니다.
         
 ## 3) 왜 변형되면 안되는지
+
+![03  왜 변형이 되면 안되는지](https://github.com/user-attachments/assets/35582c67-d848-4b13-8bb9-0a90480f75c0)
+
    
    **Warpage(뒤틀림)**은 칩이 프링글스 과자처럼 굽어 기판의 수만 개 접점이 제대로 맞물리지 못하게 만드는 현상이고, **Delamination(박리)**은 층 사이가 스티커처럼 벌어져 신호가 끊기거나 내부 열이 빠져나가지 못하게 가두는 현상입니다.
    
@@ -44,6 +47,9 @@ References
    
 ### 2. 프로젝트 개요
 
+![04  프로젝트 개요](https://github.com/user-attachments/assets/6feae6dd-7266-4372-bea2-7047a4df75c9)
+![04-1  프로젝트 개요](https://github.com/user-attachments/assets/6e8b63bd-4be3-4fb1-9f0d-f549877fae6c)
+
 반도체 패키지는 서로 다른 성질의 재료들이 겹겹이 쌓인 '초정밀 샌드위치'입니다. 열을 받으면 각 재료의 팽창 속도가 달라 두 가지 치명적인 문제가 발생합니다.
 
 문제점: 이러한 불량을 확인하기 위한 기존 시뮬레이션은 한 번 수행에 너무 많은 시간과 비용이 소모됩니다.
@@ -52,6 +58,9 @@ References
 <br>                     
 
 ### 3. 대리 모델의 도입 (The "Surrogate Model" Concept)
+
+![05  대리 모델의 도입](https://github.com/user-attachments/assets/215cd1b9-e564-494a-a393-93f6b7a6efd3)
+
 
 본 프로젝트의 핵심은 복잡하고 오래걸리는 무거운 컴퓨터 시뮬레이션 작업를 대신할 **'대리 모델(Surrogate Model)'**을 구축하는 것입니다.
 
@@ -71,6 +80,9 @@ References
 <Fig.1 플립칩 모형 단면>     
 
 ![Code_Generated_Image(1)](https://github.com/user-attachments/assets/c45c9924-063d-4268-9028-428af591cb4c)  
+
+![06  플립칩 명칭](https://github.com/user-attachments/assets/7010b81c-e037-4cd4-9653-319bcd8c90de)
+
 
 <Fig.2 플립칩 단순화 모델 이미지>    
 > 딥러닝에 유의미한 데이터를 모으기 위해 최대한 조건과 형상을 단순화 합니다. 실제 논문의 경우 3d 형상과 복잡한 조건으로 슈퍼컴퓨터를 사용합니다.   
