@@ -55,8 +55,7 @@
 ## 4. 반도체 '샌드위치' 구조 (The Subject)
 우리가 분석하는 모델은 아래와 같이 6가지 핵심 요소로 구성된 Lidded Package (뚜껑이 있는 패키지, Lidded FCBGA (Flip-Chip Ball Grid Array))입니다.   
 
-![images](https://github.com/user-attachments/assets/20b24c1f-3e37-430e-bfe3-985b92d31987)    
-
+![images]https://cdn.discordapp.com/attachments/1480386986840953003/1483424916077543536/AOI_d_9QcWirgr8pGarfiLOmcX_StkJYCMUna3G9h0asfPwcpECxvT3KIi626RfZ28Fdp4SOaRhQznZnCbRfYK1T0BS4P5gIIL47u1CWYZfsolSmhJPhZt2_j2BZq8FgvEfEUikhDmxHZYc84Or20EUzpq9_6D6kzbDTsW2Rt6KDzDrVOc1fAAs1600-rj.png?ex=69ba8a9c&is=69b9391c&hm=1d3e2ab877e1cc225cff42428330c1c5683a82161ea0efd9315fba4e1c175750&)
 <Fig.1 플립칩 모형 단면>     
 
 ![06  플립칩 명칭](https://github.com/user-attachments/assets/7010b81c-e037-4cd4-9653-319bcd8c90de)
