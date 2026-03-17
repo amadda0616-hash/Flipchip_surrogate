@@ -3,9 +3,9 @@
 ## 반도체가 열변형에 의해 휘어지고 깨지고 뜯어지는 것을 ai로 예측합니다.
 <br>
 
-### 0. 키워드 설명
+## 0. 키워드 설명
 
-## 1) CAE (Computer-Aided Engineering)란 무엇인지?
+### 1) CAE (Computer-Aided Engineering)란 무엇인지?
 
 ![01  CAE란](https://github.com/user-attachments/assets/166da2d9-df44-4706-9bdf-a40879853e84)
    컴퓨터 속 가상 세계에서 그 물건이 **튼튼한지, 열에 잘 견디는지 등을 미리 시뮬레이션해 보는 '디지털 모의실험'입니다.
@@ -15,7 +15,7 @@
    CAE의 메쉬는 그 점 하나하나마다 물리 법칙(힘, 열, 압력)을 계산하기 위한 계산 포인트입니다.
 
    
-## 2) flipchip이 무엇인지?
+### 2) flipchip이 무엇인지?
  
 ![02  플립 칩이란](https://github.com/user-attachments/assets/cd8d6bb6-e3c8-49c0-a294-5bbf95eb10b2)
 
@@ -23,7 +23,7 @@
    
    이번 프로젝트는 제 pc의 cpu인 i9-13900k를 모델로 했고 이 cpu가 플립칩 타입입니다.
         
-## 3) 왜 변형되면 안되는지
+### 3) 왜 변형되면 안되는지
 
 ![03  왜 변형이 되면 안되는지](https://github.com/user-attachments/assets/35582c67-d848-4b13-8bb9-0a90480f75c0)
 
@@ -32,7 +32,7 @@
    
    i9-13900K 같은 고성능 CPU가 전기가 통하지 않는 '먹통'이 되거나, 내부 열을 못 견디고 타버리게 만들기 때문에 설계 단계에서 반드시 막아야 할 치명적인 결함입니다.
 
-### 1. 프로젝트 레퍼런스
+## 1. 프로젝트 레퍼런스
 
 최근 반도체 패키징 분야에서는 유한요소해석(FEA)의 막대한 연산 비용을 극복하기 위해 심층신경망(DNN)을 활용한 휨(Warpage) 예측 연구[1]와 트리 기반 머신러닝을 적용한 열응력/방열 최적화 연구[2]가 활발히 진행되고 있으며,     
 복잡한 물리적 비선형성을 정밀하게 학습하기 위해 CNN 기반의 데이터 주도형 모델링 기법도 도입되고 있습니다[3].      
@@ -49,7 +49,7 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
 [6] Zhang, X. C., Yin, X. D., Huang, Z. X., Zhang, T., Ci, T. J., Li, C. Y., Wang, Q. L., & El-Rich, M. (2024). Mechanical Behavior and Failure Prediction of Cylindrical Lithium-Ion Batteries under Mechanical Abuse Using Data-Driven Machine Learning. SSRN Electronic Journal.     
  
    
-### 2. 프로젝트 개요
+## 2. 프로젝트 개요
 
 ![04  프로젝트 개요](https://github.com/user-attachments/assets/6feae6dd-7266-4372-bea2-7047a4df75c9)
 
@@ -62,7 +62,7 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
 
 ![04-1  프로젝트 개요](https://github.com/user-attachments/assets/6e8b63bd-4be3-4fb1-9f0d-f549877fae6c)
 
-### 3. 대리 모델의 도입 (The "Surrogate Model" Concept)
+## 3. 대리 모델의 도입 (The "Surrogate Model" Concept)
 
 ![05  대리 모델의 도입](https://github.com/user-attachments/assets/215cd1b9-e564-494a-a393-93f6b7a6efd3)
 
@@ -77,7 +77,7 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
 
 
 
-### 4. 반도체 '샌드위치' 구조 (The Subject)
+## 4. 반도체 '샌드위치' 구조 (The Subject)
 우리가 분석하는 모델은 아래와 같이 6가지 핵심 요소로 구성된 Lidded Package (뚜껑이 있는 패키지,Lidded FCBGA (Flip-Chip Ball Grid Array))입니다.   
 
 ![images](https://github.com/user-attachments/assets/20b24c1f-3e37-430e-bfe3-985b92d31987)    
@@ -88,9 +88,22 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
 
 
 <Fig.2 플립칩 단순화 모델 이미지>    
-> 딥러닝에 유의미한 데이터를 모으기 위해 최대한 조건과 형상을 단순화 합니다. 실제 논문의 경우 3d 형상과 복잡한 조건으로 슈퍼컴퓨터를 사용합니다.   
+> 딥러닝에 유의미한 데이터를 모으기 위해 최대한 조건과 형상을 단순화 합니다. 실제 논문의 경우 3d 형상과 복잡한 조건으로 슈퍼컴퓨터를 사용합니다.
 
-# 5. 📊 22-Column Simulation Dataset 정의서
+## 5. 📊 6-Dimension Geometric Parameter 정의서
+
+본 데이터셋은 기하학적 파탄(Mesh Error)을 방지하고 딥러닝 모델이 유의미한 변수 경향성을 학습하기 위해 설정된 상/하한선(Bounds) 규격입니다.
+
+| 분류 | 파라미터명 | 탐색 범위 (Min ~ Max) | 물리적 의미 및 설정 사유 |
+| :--- | :--- | :--- | :--- |
+| **기판/접착** | `P1 (Substrate)` | **0.80 ~ 1.20 mm** (기준 1.01) | 기판 층수(Layer) 변경에 따른 베이스 구조 강성 변화 범위 |
+| **(언더필)** | `P2 (Underfill)` | **0.05 ~ 0.09 mm** (기준 0.07) | 솔더 범프(Solder Bump) 높이에 종속되므로 타이트한 공차 부여 |
+| **(열/응력원)**| `P3 (Die)` | **0.60 ~ 0.85 mm** (기준 0.74) | 웨이퍼 백그라인딩(Back-grinding) 한계 및 표준 두께 반영 |
+| **(지지부)** | `P4 (Adhesive)` | **0.10 ~ 0.30 mm** (기준 0.19) | 실런트 도포량 한계 (접착력 확보 및 다리 들뜸/파고듬 방지) |
+| **상단 덮개** | `P5 (IHS roof)` | **1.20 ~ 1.80 mm** (기준 1.50) | 뚜껑 강성 확보 및 전체 패키지 규격(Height) 준수 마지노선 |
+| **내부 코어** | `P6 (TIM)` | **0.03 ~ 0.08 mm** (기준 0.05) | 공정상 최소 도포 두께 한계 및 열 저항 급증 방지 |
+
+## 6. 📊 22-Column Simulation Dataset 정의서
 
 본 데이터셋은 패키지 신뢰성 예측 모델(대리 모델) 학습을 위해 설계 치수(원인)와 시계열 해석 결과(결과)를 병합한 최종 마스터 데이터셋입니다. (데이터 형태: `727,200 × 22`)
 
@@ -119,7 +132,7 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
 | | `B_Avg_Shear` | 하단 계면 평균 전단 응력 | 하단 전체 전단 하중 수준 |
 | **부품 파손** | `Die_SX` | 다이 중심 굽힘 응력 (MPa) | Die Crack 방지용 굽힘 응력 ($\sigma_x$) |
 
-### 6. CAE 데이터 구현 과정
+## 7. CAE 데이터 구현 과정
 
 a. 3D 혹은 Fan에 의한 유동 해석 등이 포함되면 한개의 케이스 당 몇 시간씩 걸리게 됩니다.    
 이 경우, 딥러닝을 위해 몇 천 개의 케이스를 해석하려면 가정용 PC 1대로는 몇 달씩 걸립니다.    
@@ -138,7 +151,7 @@ e. 파트 별 두께를 패러미터로 하여 랜덤 생성해 해석된 데이
 
 f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 1개의 케이스에 23열 x 606열. 따라서 606 X 50 x 24 = 727,200개 
 
-# 7. 📈 플립칩(Flip-Chip) 패키지 열변형 3-Step 시나리오 프로파일
+## 8. 📈 플립칩(Flip-Chip) 패키지 열변형 3-Step 시나리오 프로파일
 
 본 해석은 딥러닝 대리모델 학습을 위해 '제조 공정 $\rightarrow$ 기기 작동 $\rightarrow$ 작동 종료'로 이어지는 패키지의 생애 주기(Life-Cycle)를 3단계로 압축하여 모사한 표준 프로파일입니다.
 
@@ -152,7 +165,7 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 
 <Fig.3 케이스 1 - 임의 설계 치수 기준 stpe 별 수치 그래프>
 
-# 8. 📊 22-Column Simulation Dataset 정의서
+## 9. 📊 22-Column Simulation Dataset 정의서
 
 본 데이터셋은 패키지 신뢰성 예측 모델(대리 모델) 학습을 위해 설계 치수(원인)와 시계열 해석 결과(결과)를 병합한 최종 마스터 데이터셋입니다. (데이터 형태: `727,200 × 22`)
 
@@ -180,20 +193,6 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 | | `B_Avg_Peel` | 하단 계면 평균 수직 응력 | 하단 전체 박리 하중 수준 |
 | | `B_Avg_Shear` | 하단 계면 평균 전단 응력 | 하단 전체 전단 하중 수준 |
 | **부품 파손** | `Die_SX` | 다이 중심 굽힘 응력 (MPa) | Die Crack 방지용 굽힘 응력 ($\sigma_x$) |
-
-
-# 9. 📊 6-Dimension Geometric Parameter 정의서
-
-본 데이터셋은 기하학적 파탄(Mesh Error)을 방지하고 딥러닝 모델이 유의미한 변수 경향성을 학습하기 위해 설정된 상/하한선(Bounds) 규격입니다.
-
-| 분류 | 파라미터명 | 탐색 범위 (Min ~ Max) | 물리적 의미 및 설정 사유 |
-| :--- | :--- | :--- | :--- |
-| **기판/접착** | `P1 (Substrate)` | **0.80 ~ 1.20 mm** (기준 1.01) | 기판 층수(Layer) 변경에 따른 베이스 구조 강성 변화 범위 |
-| **(언더필)** | `P2 (Underfill)` | **0.05 ~ 0.09 mm** (기준 0.07) | 솔더 범프(Solder Bump) 높이에 종속되므로 타이트한 공차 부여 |
-| **(열/응력원)**| `P3 (Die)` | **0.60 ~ 0.85 mm** (기준 0.74) | 웨이퍼 백그라인딩(Back-grinding) 한계 및 표준 두께 반영 |
-| **(지지부)** | `P4 (Adhesive)` | **0.10 ~ 0.30 mm** (기준 0.19) | 실런트 도포량 한계 (접착력 확보 및 다리 들뜸/파고듬 방지) |
-| **상단 덮개** | `P5 (IHS roof)` | **1.20 ~ 1.80 mm** (기준 1.50) | 뚜껑 강성 확보 및 전체 패키지 규격(Height) 준수 마지노선 |
-| **내부 코어** | `P6 (TIM)` | **0.03 ~ 0.08 mm** (기준 0.05) | 공정상 최소 도포 두께 한계 및 열 저항 급증 방지 |
 
 # 🚀 [Master Guide] 2D 열기계 해석 기반 패키지 최적 설계 파이프라인
 
