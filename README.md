@@ -44,20 +44,18 @@
 
 장점: 기존 시뮬레이션으로 수 시간이 걸리던 검증을 0.1초 이내로 단축하여 실시간 설계 최적화를 가능하게 합니다.
 
-![images](https://github.com/user-attachments/assets/20b24c1f-3e37-430e-bfe3-985b92d31987)    
-<Fig.1 플립칩 모형 단면>     
+
 
 ### 3. 반도체 '샌드위치' 구조 (The Subject)
-우리가 분석하는 모델은 아래와 같이 6가지 핵심 요소로 구성된 Lidded Package (뚜껑이 있는 패키지,Lidded FCBGA (Flip-Chip Ball Grid Array))입니다.    
+우리가 분석하는 모델은 아래와 같이 6가지 핵심 요소로 구성된 Lidded Package (뚜껑이 있는 패키지,Lidded FCBGA (Flip-Chip Ball Grid Array))입니다.   
 
-<img width="424" height="256" alt="패키지 파트 명칭" src="https://github.com/user-attachments/assets/f6b73ab8-4a27-4991-9543-82d2a14c60aa" />
-       
+![images](https://github.com/user-attachments/assets/20b24c1f-3e37-430e-bfe3-985b92d31987)    
 
-<Fig.2 플립칩 모델링 파트 설명>        
+<Fig.1 플립칩 모형 단면>     
 
 ![Code_Generated_Image(1)](https://github.com/user-attachments/assets/c45c9924-063d-4268-9028-428af591cb4c)  
 
-<Fig.3 플립칩 단순화 모델 이미지>    
+<Fig.2 플립칩 단순화 모델 이미지>    
 > 딥러닝에 유의미한 데이터를 모으기 위해 최대한 조건과 형상을 단순화 합니다. 실제 논문의 경우 3d 형상과 복잡한 조건으로 슈퍼컴퓨터를 사용합니다.
 
 ### 4. 프로젝트 중 수행 내용
@@ -126,19 +124,19 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 
 <img width="1164" height="1600" alt="Sim 01 결과 그래프" src="https://github.com/user-attachments/assets/f46c6022-bece-4189-a28b-2f35ff3e8896" />
 
-<Fig.4 케이스 1 - 임의 설계 치수 기준 stpe 별 수치 그래프>
+<Fig.3 케이스 1 - 임의 설계 치수 기준 stpe 별 수치 그래프>
 
 <img width="1360" height="907" alt="directional deformation 300s" src="https://github.com/user-attachments/assets/d4de256f-3acb-4a74-a767-4ad4d5c130ad" />
 
-<Fig.5 300s 냉각 이후 deformation>
+<Fig.4 300s 냉각 이후 deformation>
 
 <img width="1431" height="907" alt="normal stress 179s" src="https://github.com/user-attachments/assets/a1f587a5-9937-49db-a192-9df13d0aef5c" />
 
-<Fig.6 step2 발열 시점 normal stress>
+<Fig.5 step2 발열 시점 normal stress>
 
 <img width="1431" height="907" alt="normal stress 300s" src="https://github.com/user-attachments/assets/4702cb27-7850-40f7-ad65-6cdb57331af5" />
 
-<Fig.7 step3 냉각 시점 normal stress>
+<Fig.6 step3 냉각 시점 normal stress>
 
 
 # 📊 22-Column Simulation Dataset 정의서
