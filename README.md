@@ -45,10 +45,6 @@ References
 [2] Acharya, P. V., Lokanathan, M., Ouroua, A., Hebner, R., Strank, S., & Bahadur, V. (2018). Machine Learning-Based Predictions of Benefits of High Thermal Conductivity Encapsulation Materials for Power Electronics Packaging. Journal of Electronic Packaging, 140(4), 041109.    
 [3] Yang, J., Wu, Y., & Liu, X. (2023). Proton Exchange Membrane Fuel Cell Power Prediction Based on Ridge Regression and Convolutional Neural Network Data-Driven Model. Sustainability, 15(14), 11010.    
 
-![04-0  프로젝트 레퍼런스](https://github.com/user-attachments/assets/344b0c77-a08e-492e-9cca-c34c9d93d0f5)
-
-
-
    
 ### 2. 프로젝트 개요
 
