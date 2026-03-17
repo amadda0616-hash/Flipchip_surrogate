@@ -187,8 +187,6 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 
 # 🚀 [Master Guide] 2D 열기계 해석 기반 패키지 최적 설계 파이프라인
 
-> **이 문서는 새로운 LLM이나 AI 에이전트가 본 프로젝트에 투입되었을 때, 이전 맥락(Context) 없이도 프로젝트의 물리적 배경, 데이터 구조, 6단계 최적화 파이프라인을 완벽히 이해하고 즉시 코드를 작성할 수 있도록 팩트 체크와 제약 조건(Constraints)을 명문화한 마스터 가이드입니다.**
-
 ---
 
 ## 📌 9. 프로젝트 사전 정보 (Project Context & Meta-Data)
@@ -218,25 +216,29 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 
 ## 📌 10. 6단계 최적화 파이프라인 (Action Plan)
 
-본 프로젝트는 단순히 대리 모델을 만드는 것을 넘어, 역설계(Inverse Design)와 유전 알고리즘(GA)을 결합하여 최적의 P1~P6를 도출하는 End-to-End 프레임워크입니다. **코드 작성 시 아래의 각 단계별 지침과 [🚨 경고] 사항을 반드시 준수해야 합니다.**
+본 프로젝트는 단순히 대리 모델을 만드는 것을 넘어, 역설계(Inverse Design)와 유전 알고리즘(GA)을 결합하여 최적의 P1~P6를 도출하는 End-to-End 프레임워크입니다.
 
 ### Step 1: 대리 모델(Surrogate)을 통한 데이터 증강 (Data Augmentation)
 * **목표:** 800여 개의 생존 데이터 한계를 극복하기 위해 가상 데이터를 생성.
-* **방법:** 생존한 데이터의 '절댓값 Max Peak' 지표들을 추출하여 머신러닝(XGBoost 또는 GPR) 학습. 이후 난수 생성기(Monte Carlo)로 10만 개의 가상 P1~P6 조합을 만들고 Y값들을 예측함.
+* **방법:** 생존한 데이터의 '절댓값 Max Peak' 지표들을 추출하여 머신러닝(XGBoost, GPR, Tabular ResNet) 학습. 이후 난수 생성기(LHS, Bayesian Optimization)로 10만 개의 가상 P1~P6 조합을 만들고 Y값들을 예측함.
+* **사용된 기법 및 알고리즘:** XGBOOST, GPR + ARD 커널, Tabular ResNet + Permutation Feature Importance, 난수화 기법 (LHS, Bayesian Optimization), MinMaxScaler
 
 ### Step 2: 은닉 제약조건 분류기(Gatekeeper)를 통한 필터링
 * **목표:** 물리적으로 파괴되는(해석이 터지는) 치수 조합을 사전에 걸러냄.
 * **방법:** 원본 1200개 DP의 CSV 파일 존재 여부를 1(Safe)과 0(Fail)으로 라벨링하여 Random Forest 분류기 학습. Step 1에서 만든 10만 개의 가상 조합을 이 분류기에 통과시켜, **생존 확률 95% 이상인 안전한 가상 데이터**만 필터링함.
+* **사용된 기법 및 알고리즘:** Random Forest
 
 ### Step 3: 파레토 프론티어 (Pareto Frontier) 타겟 곡선 추출
 * **목표:** 역설계 AI에 입력할 '물리적으로 도달 가능하면서도 완벽에 가까운 타겟 시계열 텐서' 생성.
 * **[🚨 경고 - 치명적 오류 주의]:** * 300초 '평균값'이 아닌 **반드시 시계열 전체의 '절댓값 최대 피크(Max Peak)'**를 기준으로 우수 데이터를 선별할 것. [Image of thermal cycling stress hysteresis loop]
   * Von Mises 등가 응력이 아닌 **`WarpMax`와 `T_Tip_Peel` 단 2가지만을 기준**으로 파레토 최적 DP(상위 5~10%)를 선별할 것.
 * **추출 및 스케일링 방법:** 선정된 파레토 DP의 300초 Raw 시계열 곡선을 8~9개 주요 채널 모두 통째로 가져옴. 이후 모든 채널에 **동일한 스칼라(예: x0.9)**를 곱하여 진폭만 10% 낮춘 '유토피아 타겟 다채널 텐서'를 생성. (물리적 위상차 보존)
+* **사용된 기법 및 알고리즘:** 파레토 비지배 정렬
 
 ### Step 4: 딥러닝 기반 역설계 (Inverse Design) 초안 출력
 * **목표:** 타겟 곡선을 입력하면 이를 구현할 수 있는 최적의 P1~P6 초안(Draft) 도출.
 * **방법:** 1D-CNN 역방향 모델 또는 오토인코더(Autoencoder) 잠재 매핑 모델을 사용. Step 3에서 만든 '유토피아 타겟 텐서'를 입력하면 AI가 1차 P1~P6 설계안을 한 번의 연산으로 출력함. (8채널 동시 입력 구조로 전체 응력 밸런스 학습)
+* **사용된 기법 및 알고리즘:** 시계열 리샘플링, 사비츠키-골레이 필터, 1D-CNN 오토인코더, Residual Block (ResNet),  U-Net Skip Connection,  Upsample + Conv1d, Smooth L1 Loss, Total Variation Loss, 지도형 오토인코더, 다층 퍼셉트론 (MLP) 역매핑, StandardScaler
 
 ### Step 5: 머신러닝 미세 튜닝 (Fine-tuning via GA & Penalty Limits)
 * **목표:** 도출된 초안을 바탕으로 유전 알고리즘(NSGA-II)을 돌려 최종 최적화 및 물리적 한계치(Limit) 강제 적용.
@@ -244,10 +246,43 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
   2. 목적 함수(Loss)는 `WarpMax`와 `T_Tip_Peel` 가중치 합산으로 최소화.
   3. **[🚨 필수 - Hard Constraints]:** 최적화 과정에서 나머지 응력들이 재료의 물리적 한계치(Limit)를 넘을 경우, Loss에 +999,999점의 페널티를 부여하여 즉시 도태시킴.
      * Limit 예시: `Die_SX` < 실리콘 파괴 인성, `T_Tip_Shear` < 계면 피로 한계 등. [Image of Pareto front in multi-objective optimization]
+* **사용된 기법 및 알고리즘:** NSGA-II (다목적 유전 알고리즘), 강건 최적화, Feasibility Rule (`pymoo` `G` Matrix),  Knee Point (최적 밸런스 점 추출)
 
 ### Step 6: 디지털 트윈 (Digital Twin) 최종 시뮬레이션 검증
 * **목표:** AI가 제시한 최종 P1~P6 조합을 실제 Ansys 2D 해석에 입력.
 * **방법:** 도출된 시계열 곡선 결과를 베이스라인(초기 설계) 및 Step 3의 유토피아 타겟과 중첩 플롯(Overlay Plot)하여 휨 및 박리 응력의 저감률을 검증.
+
+
+## 11. 결과 분석
+
+### 11.1 
+
+### 11.2 최적 설계 전후 비교
+
+### 11.3 대리모델 성능평가
+
+
+## 12. 개선 방안
+
+* 12.1 패러미터의 변경
+  
+  이번 실험에서 선정한 두께 패러미터는 실제로는 파운드리나 칩 설계사가 이미 고정해놓은 상수로 변경이 어렵습니다.
+두께의 경우 소숫점 단위의 최적 수치를 도출하더라도 절대 이와 정확한 수치를 적용하기 어렵습니다. 현실적으로 가공오차는 필연적이며 정밀가공을 하더라도 단가나 납기의 문제가 발생합니다.
+warpage의 경우 핵심 요인이 CTE(열팽창계수 차이), 온도변화량, 탄성계수, 두께 이기 때문에 EMC의 배합(CTE), 공정온도 (이번 실험에서는 120 -> 22도로 고정), si-bridge 두께나 substrtate의 내부 구조 등이 더 좋은 패러미터 입니다.
+(reference. Artificial Intelligence-Based Warpage Prediction Model for Accelerating Thermo-Mechanical Simulation in Advanced Packaging,  2025 IEEE 75th Electronic Components and Technology Conference (ECTC).)
+
+* 12.3 CAE 시뮬레이션 고도화
+  
+  본 프로젝트에서는 2D 모델링을 사용하여 기판 등 파트의 형상의 복잡성을 단순화 하였습니다.
+또한, 팬에 의한 냉각 같은 유동 해석 문제도 간략화를 통해 생략했습니다.
+실제 현실에 가까운 결과를 원할 경우 실제 3d 형상에 유동해석도 포함해야 합니다만
+이 경우 실제 논문들에서 사용하는 슈퍼 컴퓨터를 사용하지 않으면 몇 개월을 24시간 풀로 돌려도 충분한 데이터를 얻을수 없습니다
+
+* 12.4 대리모델의 방향성
+
+   본래 기존의 대리모델의 개념에 맞게 구현하려면 모든 time step에 대응하는 시계열 데이터를 예측하고 구현하는 대리모델을 만들어야 하지만 이는 논문 수준의 매우 어려운 작업이기에 이번에는 절대값의 최대치만 예측하는 대리모델을 구현했습니다.
+하지만 높은 정확도의 시계열 데이터를 예측하는 대리모델을 구현할 경우 step4 에서 학습시킬때 더 많은 데이터를 기반으로 더 정확한 결과를 도출할 수 있습니다.
+
 
 
 
