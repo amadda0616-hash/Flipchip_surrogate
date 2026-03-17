@@ -84,8 +84,6 @@ References[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (
 
 <Fig.1 플립칩 모형 단면>     
 
-![Code_Generated_Image(1)](https://github.com/user-attachments/assets/c45c9924-063d-4268-9028-428af591cb4c)  
-
 ![06  플립칩 명칭](https://github.com/user-attachments/assets/7010b81c-e037-4cd4-9653-319bcd8c90de)
 
 
