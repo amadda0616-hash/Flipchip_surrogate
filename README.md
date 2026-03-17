@@ -28,8 +28,21 @@
    **Warpage(뒤틀림)**은 칩이 프링글스 과자처럼 굽어 기판의 수만 개 접점이 제대로 맞물리지 못하게 만드는 현상이고, **Delamination(박리)**은 층 사이가 스티커처럼 벌어져 신호가 끊기거나 내부 열이 빠져나가지 못하게 가두는 현상입니다.
    
    i9-13900K 같은 고성능 CPU가 전기가 통하지 않는 '먹통'이 되거나, 내부 열을 못 견디고 타버리게 만들기 때문에 설계 단계에서 반드시 막아야 할 치명적인 결함입니다.
+
+### 1. 프로젝트 레퍼런스
+
+최근 반도체 패키징 분야에서는 유한요소해석(FEA)의 막대한 연산 비용을 극복하기 위해 심층신경망(DNN)을 활용한 휨(Warpage) 예측 연구[1]와 트리 기반 머신러닝을 적용한 열응력/방열 최적화 연구[2]가 활발히 진행되고 있으며,     
+복잡한 물리적 비선형성을 정밀하게 학습하기 위해 CNN 기반의 데이터 주도형 모델링 기법도 도입되고 있습니다[3]. 본 프로젝트는 이러한 기존의 단순 순방향 예측(Forward Prediction)을 넘어,    
+가상의 완벽한 응력 상태를 정의한 '유토피아 타겟 텐서(Utopia Tensor)'와 오토인코더의 잠재 공간(Latent Space)을 활용하여 최적 설계의 초안을 즉시 도출하는 역설계(Inverse Design) 파이프라인을 제안합니다.     
+특히 시계열 파동에서 가장 파괴적인 'Max Peak'만을 추출해 학습 효율을 극대화하고, GPR(Gaussian Process Regression)이 산출하는 예측 불확실성($\sigma$)을 유전 알고리즘(NSGA-II)의 강제 제약 조건(Hard Constraint)으로 부여함으로써,    
+AI 특유의 꼼수(Reward Hacking)나 메쉬 붕괴 에러를 원천 차단하는 '제조 가능한 강건 최적화(Robust Optimization)'를 달성한 것이 본 연구의 가장 큰 차별점입니다.     
+
+References     
+[1] Panigrahy, S. K., Che, F. X., Ong, Y. C., Ng, H. W., & Kumar, G. (2025). Deep Learning Study on Memory IC Package Warpage Using Deep Neural Network and Finite Element Simulation. Chips, 4, 35.     
+[2] Acharya, P. V., Lokanathan, M., Ouroua, A., Hebner, R., Strank, S., & Bahadur, V. (2018). Machine Learning-Based Predictions of Benefits of High Thermal Conductivity Encapsulation Materials for Power Electronics Packaging. Journal of Electronic Packaging, 140(4), 041109.    
+[3] Yang, J., Wu, Y., & Liu, X. (2023). Proton Exchange Membrane Fuel Cell Power Prediction Based on Ridge Regression and Convolutional Neural Network Data-Driven Model. Sustainability, 15(14), 11010.    
    
-### 1. 프로젝트 개요
+### 2. 프로젝트 개요
 
 반도체 패키지는 서로 다른 성질의 재료들이 겹겹이 쌓인 '초정밀 샌드위치'입니다. 열을 받으면 각 재료의 팽창 속도가 달라 두 가지 치명적인 문제가 발생합니다.
 
@@ -38,7 +51,7 @@
 해결: 이 뒤틀림을 예측하려면 복잡한 물리 계산(시뮬레이션)이 필요한데, 한 번 계산에 시간이 너무 오래 걸립니다. 그래서 우리는 결과를 순식간에 맞추는 AI를 가르치기로 했습니다.    
 <br>                     
 
-### 2. 대리 모델의 도입 (The "Surrogate Model" Concept)
+### 3. 대리 모델의 도입 (The "Surrogate Model" Concept)
 
 본 프로젝트의 핵심은 복잡하고 오래걸리는 무거운 컴퓨터 시뮬레이션 작업를 대신할 **'대리 모델(Surrogate Model)'**을 구축하는 것입니다.
 
@@ -50,7 +63,7 @@
 
 
 
-### 3. 반도체 '샌드위치' 구조 (The Subject)
+### 4. 반도체 '샌드위치' 구조 (The Subject)
 우리가 분석하는 모델은 아래와 같이 6가지 핵심 요소로 구성된 Lidded Package (뚜껑이 있는 패키지,Lidded FCBGA (Flip-Chip Ball Grid Array))입니다.   
 
 ![images](https://github.com/user-attachments/assets/20b24c1f-3e37-430e-bfe3-985b92d31987)    
@@ -62,7 +75,7 @@
 <Fig.2 플립칩 단순화 모델 이미지>    
 > 딥러닝에 유의미한 데이터를 모으기 위해 최대한 조건과 형상을 단순화 합니다. 실제 논문의 경우 3d 형상과 복잡한 조건으로 슈퍼컴퓨터를 사용합니다.
 
-### 4. 프로젝트 중 수행 내용
+### 5. 프로젝트 중 수행 내용
 아래 7. 진행 과정 (The Process)에 후술할 결과 내용은 1개의 임의 형상에 대한 해석 결과 입니다.    
 위 구조에서 각 파트의 두께 길이를 패러미터로 설정합니다. (변형에 대한 해석이기 때문에)     
 쿨링 팬에 의한 효과나 재질, 두께 외의 형상 등은 반영시 해석시간이 너무 길어져 기간 내에 데이터 수집이 불가능합니다.    
