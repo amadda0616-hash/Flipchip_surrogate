@@ -251,7 +251,7 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 
 ### Step 4: 딥러닝 기반 역설계 (Inverse Design) 초안 출력
 * **목표:** 타겟 곡선을 입력하면 이를 구현할 수 있는 최적의 P1~P6 초안(Draft) 도출.
-* **방법:** 1D-CNN 역방향 모델 또는 오토인코더(Autoencoder) 잠재 매핑 모델을 사용. Step 3에서 만든 '유토피아 타겟 텐서'를 입력하면 AI가 1차 P1~P6 설계안을 한 번의 연산으로 출력함. (8채널 동시 입력 구조로 전체 응력 밸런스 학습)
+* **방법:** 1D-CNN 역방향 모델 또는 오토인코더(Autoencoder) 잠재 매핑 모델을 사용. Step 3에서 만든 '유토피아 타겟 텐서'를 입력하면 AI가 1차 P1-P6 설계안을 한 번의 연산으로 출력함. (8채널 동시 입력 구조로 전체 응력 밸런스 학습)
 * **사용된 기법 및 알고리즘:** 시계열 리샘플링, 사비츠키-골레이 필터, 1D-CNN 오토인코더, Residual Block (ResNet),  U-Net Skip Connection,  Upsample + Conv1d, Smooth L1 Loss, Total Variation Loss, 지도형 오토인코더, 다층 퍼셉트론 (MLP) 역매핑, StandardScaler
 
 ### Step 5: 머신러닝 미세 튜닝 (Fine-tuning via GA & Penalty Limits)
