@@ -155,7 +155,9 @@ e. 파트 별 두께를 패러미터로 하여 랜덤 생성해 해석된 데이
 
 f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 1개의 케이스에 23열 x 606열. 따라서 606 X 50 x 24 = 727,200개 
 
-<img width="2577" height="1192" alt="normal stress 300s(1)" src="https://github.com/user-attachments/assets/1da6fae9-a988-4299-b1bc-0e88e8af8034" />
+<img width="1800" height="900" alt="normal stress 300s(1)" src="https://github.com/user-attachments/assets/1da6fae9-a988-4299-b1bc-0e88e8af8034" />
+<img width="1800" height="900" alt="shear stress 300s(1)" src="https://github.com/user-attachments/assets/37fea198-0b02-4556-88dc-95ff05c07477" />
+<img width="1800" height="900" alt="directional deformation 300s(1)" src="https://github.com/user-attachments/assets/f10880a2-2c85-4b9e-a789-6857952e4d76" />
 
 <Fig.3 CAE 해석 결과 예시>
 
@@ -408,17 +410,43 @@ Step 4에서 도출된 P1~P6 초안을 바탕으로 **NSGA-II 유전 알고리�
  
 ### 12.2 최적 설계 전후 비교 
 
+<img width="719" height="236" alt="결과 교차 검증" src="https://github.com/user-attachments/assets/48fe6de2-326e-4f30-b3da-770ec55c66e8" />
+
+<img width="1046" height="336" alt="JMS결과 교차 검증" src="https://github.com/user-attachments/assets/aabb03d4-462e-4ca0-b6cc-118256385734" />
+
+<fig 18. Case B: GPR + ARD 커널 + LHS와 Case C: Tabular ResNet + Bayesian Optimization의 개선 전후 개선율>
+
+비교용으로 패러미터 범위 이내의 임의의 수치로 만든 비교군과 case B, C의 휘어짐(warpmax), 박리(T_Tip_peel), 다이 깨짐(Die_SY_Max)를 비교하면 둘다 모두 우수하게 개선 된것을 확인 할수 있다.
+
+임의의 수치 결과는 휘어짐, 박리가 발생하는 수치였지만 case B, C는 모두 방지되는 안전 영역대에 도달하였다.
+
+<img width="1600" height="444" alt="개선 결과 시계열 그래프" src="https://github.com/user-attachments/assets/200b3f6b-910f-4945-9430-c92dff2f5a2b" />
+
+<fig 19. Case B: GPR + ARD 커널 + LHS의 개선 전후 시계열 그래프 비교>
+
+시계열 전체 그래프를 보아도 크게 개선 된 것을 확인할 수 있다.
+
 ### 12.3 대리모델 성능평가
+
+step 1에서 학습 시킨 대리모델의 성능이 어느정도 인지 실제 cae 프로그램 결과와 일치율을 비교해보았다.
+이는 대리모델 논문들에서도 자주 사용되는 성능 확인 방식이다.
+
+<img width="980" height="1489" alt="대리 모델 성능 결과" src="https://github.com/user-attachments/assets/1a63aaf5-7c4b-4f0c-8653-17f4c026a9f4" />
+
+<fig 20. 대리모델 성능평가>
+
+결과 휘어짐과 박리를 보여주는 핵심 컬럼인 warpmax와 t_tip_peel은 90% 이상의 우수한 일치율을 보여주었다.
+이외에도 좋은 일치율이지만 낮은 신뢰도인 컬럼도 있었고 T_avg_peel과 같이 노이즈에 의해 엉망이 결과가 나온 컬럼도 있었다.
 
 ### 12.4 ai모델 학습시 공학적 제한의 필요성 (미세 튜닝의 필요성)
 
 <img width="707" height="255" alt="결과 교차 검증" src="https://github.com/user-attachments/assets/7abdc6a5-a379-4bc9-a298-0a9c66aedb2f" />
 
-<Fig 18. 압도적으로 뛰어난 개선 품질>
+<Fig 21. Case A : XGboost + LHS의 압도적으로 뛰어난 개선 품질>
 
 <img width="2561" height="1356" alt="directional deformation 300s" src="https://github.com/user-attachments/assets/6a82f511-8bd9-4321-964a-931ea8f12682" />
 
-<Fig 19. 물리적 비현실적인 형상>
+<Fig 22. Case A : XGboost + LHS의 물리적 비현실적인 형상>
 
 미세 튜닝에서 바운더리에 대한 클리핑이 적용 되지 않는다면 위 결과의 기판 두께 0.01mm같은 비현실적인 형상이 도출될수 있다.    
 단순 수치적으로는 최적의 결과를 도출했기 때문에 우수한 개선 결과를 보였다.
