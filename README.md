@@ -7,7 +7,8 @@
 
 ### 1) CAE (Computer-Aided Engineering)란 무엇인지?
 
-![01  CAE란](https://github.com/user-attachments/assets/166da2d9-df44-4706-9bdf-a40879853e84)
+![01  CAE란_2](https://github.com/user-attachments/assets/a42065d8-5f65-43a8-8534-10a495136957)
+
    컴퓨터 속 가상 세계에서 그 물건이 **튼튼한지, 열에 잘 견디는지 등을 미리 시뮬레이션해 보는 '디지털 모의실험'입니다.
    
    CG나 3D 모델링에서 배우의 얼굴이나 몸에 점을 찍어 동작을 읽어내는 '트래커(Tracker)'를 떠올려 보세요.
@@ -25,7 +26,7 @@
         
 ### 3) 왜 변형되면 안되는지
 
-![03  왜 변형이 되면 안되는지](https://github.com/user-attachments/assets/35582c67-d848-4b13-8bb9-0a90480f75c0)
+![03  왜 변형이 되면 안되는지_2](https://github.com/user-attachments/assets/99de2347-4fb1-48fa-b21c-aa4fc2f468a3)
 
    
    **Warpage(뒤틀림)**은 칩이 프링글스 과자처럼 굽어 기판의 수만 개 접점이 제대로 맞물리지 못하게 만드는 현상이고, **Delamination(박리)**은 층 사이가 스티커처럼 벌어져 신호가 끊기거나 내부 열이 빠져나가지 못하게 가두는 현상입니다.
