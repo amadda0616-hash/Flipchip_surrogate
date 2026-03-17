@@ -235,11 +235,11 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 ### Step 1: 대리 모델(Surrogate)을 통한 데이터 증강 (Data Augmentation)
 * **목표:** 800여 개의 생존 데이터 한계를 극복하기 위해 가상 데이터를 생성.
 * **방법:** 생존한 데이터의 '절댓값 Max Peak' 지표들을 추출하여 머신러닝(XGBoost, GPR, Tabular ResNet) 학습. 이후 난수 생성기(LHS, Bayesian Optimization)로 10만 개의 가상 P1~P6 조합을 만들고 Y값들을 예측함.
-* **사용된 기법 및 알고리즘:** XGBOOST, GPR + ARD 커널, Tabular ResNet + Permutation Feature Importance, 난수화 기법 (LHS, Bayesian Optimization), MinMaxScaler
+* **사용된 기법 및 알고리즘:** XGBOOST, GPR + ARD 커널, Tabular ResNet + Permutation Feature Importance, 난수화 기법 (LHS, Bayesian Optimization), MinMaxScaler, 5-Fold CV
 
 ### Step 2: 은닉 제약조건 분류기(Gatekeeper)를 통한 필터링
 * **목표:** 물리적으로 파괴되는(해석이 터지는) 치수 조합을 사전에 걸러냄.
-* **방법:** 원본 1200개 DP의 CSV 파일 존재 여부를 1(Safe)과 0(Fail)으로 라벨링하여 Random Forest 분류기 학습. Step 1에서 만든 10만 개의 가상 조합을 이 분류기에 통과시켜, **생존 확률 95% 이상인 안전한 가상 데이터**만 필터링함.
+* **방법:** 원본 1200개 DP의 CSV 파일 존재 여부를 1(Safe)과 0(Fail)으로 라벨링하여 Random Forest 분류기 학습. Step 1에서 만든 10만 개의 가상 조합을 이 분류기에 통과시켜, **결측치가 발생하지 않는 정상적인 형상의 데이터**만 필터링함.
 * **사용된 기법 및 알고리즘:** Random Forest
 
 ### Step 3: 파레토 프론티어 (Pareto Frontier) 타겟 곡선 추출
@@ -269,11 +269,74 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 
 ## 12. 결과 분석
 
-### 12.1 
+### 12.1 step 별 시각화 그래프 및 분석
 
-### 12.2 최적 설계 전후 비교
+### Step 1: 대리 모델(Surrogate)을 통한 데이터 증강 (Data Augmentation)
+Case A : XGboost + LHS, Case B: GPR + ARD 커널 + LHS, Case C: Tabular ResNet + Bayesian Optimization 로 나누어 진행
+<img width="2151" height="1183" alt="image" src="https://github.com/user-attachments/assets/dc245223-a80f-4032-9c10-9664ab29fd98" />
+ Y 변수 피크값 분포 히스토그램
+각 응력/변형 채널의 피크 분포를 확인하여 편향(skew)이나 이상치 진단
+
+<img width="1481" height="471" alt="image" src="https://github.com/user-attachments/assets/8a7445b0-93b0-4885-8f15-ebb9b120f678" />
+상관계수 히트맵
+어떤 두께 변수(P)가 어떤 응력(Y)에 강하게 영향을 미치는지 파악
+
+<img width="2391" height="591" alt="image" src="https://github.com/user-attachments/assets/e6281223-8201-4bb3-b980-8f7a4dc5a2e8" />
+GPR의 모델 성능 평가
+
+[Graph A] 변수별 학습 성취도 (R²)
+거시적인 휨(Warpage) 물리 법칙은 AI가 완벽히 파악(R² $\approx$ 1.0), 일부 변수는 미시적 비선형성을 가져 AI가 경향성은 알겠는데 완벽한 수식은 못 찾았다.   
+이를 통해 R2 score가 높은 핵심 7개 변수 WarpMax, T_Tip_Peel, Die_SY_Max, B_Avg_Peel, B_Tip_SEQV, T_Tip_Strain, T_Tip_SEQV을 중심으로 해석을 진행합니다.  
+
+[Graph B] 실제 vs 예측 산점도 (예측 해상도)
+휨 예측은 100%에 가까운 디지털 트윈 수준으로 일치하지만, 박리 응력은 올바른 방향성(트렌드)만 잡을 뿐 핀포인트 수치 예측에는 다소 넓게 흩뿌려져(Scatter) 있습니다.
+
+[Graph C] GPR 불확실성(σ) 분포 (강건 설계의 핵심
+AI가 박리 응력처럼 자신이 예측하기 어려운 구간(높은 σ)을 스스로 인지하고 수치화한 결과입니다. WarpMax (파란색 좁은 탑): 불확실성($\sigma$)이 0 근처에 뾰족하게 몰려 있습니다.
+T_Tip_Peel (주황색 넓은 산): 불확실성($\sigma$)이 우측으로 넓게 퍼져 있습니다.
+이 주황색 넓은 산(높은 $\sigma$)의 존재를 확인했기 때문에, Step 5 유전 알고리즘에서 목적함수 + 2$\sigma$라는 강건 최적화를 적용하게 되었습니다.
+
+<img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/c37d49ae-934f-497d-ab4b-6036d4d17fd9" />
+PR + ARD 커널 + LHS의 증강 데이터 품질 검증
+
+<img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/7b8faaa1-8cd5-4dda-93c1-e3d488072dc2" />
+XGboost + LHS의 증강 데이터 품질 검증
+
+<img width="2151" height="1012" alt="image" src="https://github.com/user-attachments/assets/69e8cc62-8f35-43f0-8378-e0653f425217" />
+Tabular Resnet + Bayesian Optimization의 증강 데이터 품질 검증
+
+LHS의 경우 골고루 데이터를 난수화 하다보니 극단 적인 형상도 포함 되어 양 끝단 뿔 형상이 warpmax 그래프에서 확인이 가능하다. 
+XGBoost경우 트리 기반 모델의 특성으로 뿔 형상이 강화된다.
+Bayesian Optimization은 최적화 과정이 포함되기 대문에 최적 조건에 몰리는  형상을 확인 가능하다.
+
+### Step 2: 은닉 제약조건 분류기(Gatekeeper)를 통한 필터링
+
+**Random Forest** (n_estimators=300, max_depth=7, class_weight='balanced')를 통해 분류된 결측치 생성 예측 데이터는 제거한다. -> 결과 20% 제거
+
+<img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/75bec92a-f98c-488a-b001-12bc2c67c2dc" />
+gpr의 분류기 이후 증강 데이터 성능 비교 (max peak)
+
+분류기 이후 warpmax의 양 뿔 형상이 제거된 것을 확인 할수 있다. 
+XGBoost의 경우 뿔 형상의 비중이 높아 분류기로 완전히 제거되지 않았다.
+
+### Step 3: 파레토 프론티어 (Pareto Frontier) 타겟 곡선 추출
+
+위에서 선택한 R2 score가 높은 핵심 7개 변수만 추출하여 유토피아 텐서를 생성한다. 
+Step 4 역설계 모델(1D-CNN)의 입력 텐서로써 사용이 된다. 
+
+### Step 4: 딥러닝 기반 역설계 (Inverse Design) 초안 출력
+
+### Step 5: 머신러닝 미세 튜닝 (Fine-tuning via GA & Penalty Limits)
+
+### 12.2 최적 설계 전후 비교 
 
 ### 12.3 대리모델 성능평가
+
+### 12.4 ai모델 학습시 공학적 제한의 필요성 (수치와 현실의 차이)
+
+<img width="2561" height="1356" alt="directional deformation 300s" src="https://github.com/user-attachments/assets/6a82f511-8bd9-4321-964a-931ea8f12682" />
+
+<img width="707" height="255" alt="결과 교차 검증" src="https://github.com/user-attachments/assets/7abdc6a5-a379-4bc9-a298-0a9c66aedb2f" />
 
 
 ## 13. 개선 방안
