@@ -151,6 +151,10 @@ e. 파트 별 두께를 패러미터로 하여 랜덤 생성해 해석된 데이
 
 f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 1개의 케이스에 23열 x 606열. 따라서 606 X 50 x 24 = 727,200개 
 
+<img width="2577" height="1192" alt="normal stress 300s(1)" src="https://github.com/user-attachments/assets/1da6fae9-a988-4299-b1bc-0e88e8af8034" />
+
+<Fig.3 CAE 해석 결과 예시>
+
 ## 8. 📈 플립칩(Flip-Chip) 패키지 열변형 3-Step 시나리오 프로파일
 
 본 해석은 딥러닝 대리모델 학습을 위해 '제조 공정 $\rightarrow$ 기기 작동 $\rightarrow$ 작동 종료'로 이어지는 패키지의 생애 주기(Life-Cycle)를 3단계로 압축하여 모사한 표준 프로파일입니다.
@@ -163,7 +167,7 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 
 <img width="1164" height="1600" alt="Sim 01 결과 그래프" src="https://github.com/user-attachments/assets/f46c6022-bece-4189-a28b-2f35ff3e8896" />
 
-<Fig.3 케이스 1 - 임의 설계 치수 기준 stpe 별 수치 그래프>
+<Fig.4 케이스 1 - 임의 설계 치수 기준 stpe 별 수치 그래프>
 
 ## 9. 📊 22-Column Simulation Dataset 정의서
 
