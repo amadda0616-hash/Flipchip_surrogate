@@ -274,15 +274,15 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 ### Step 1: 대리 모델(Surrogate)을 통한 데이터 증강 (Data Augmentation)
 Case A : XGboost + LHS, Case B: GPR + ARD 커널 + LHS, Case C: Tabular ResNet + Bayesian Optimization 로 나누어 진행
 <img width="2151" height="1183" alt="image" src="https://github.com/user-attachments/assets/dc245223-a80f-4032-9c10-9664ab29fd98" />
- Y 변수 피크값 분포 히스토그램
+ <Fig 5. Y 변수 피크값 분포 히스토그램>
 각 응력/변형 채널의 피크 분포를 확인하여 편향(skew)이나 이상치 진단
 
 <img width="1481" height="471" alt="image" src="https://github.com/user-attachments/assets/8a7445b0-93b0-4885-8f15-ebb9b120f678" />
-상관계수 히트맵
+<Fig 6. 상관계수 히트맵>
 어떤 두께 변수(P)가 어떤 응력(Y)에 강하게 영향을 미치는지 파악
 
 <img width="2391" height="591" alt="image" src="https://github.com/user-attachments/assets/e6281223-8201-4bb3-b980-8f7a4dc5a2e8" />
-GPR의 모델 성능 평가
+<Fig 7. GPR의 모델 성능 평가>
 
 [Graph A] 변수별 학습 성취도 (R²)
 거시적인 휨(Warpage) 물리 법칙은 AI가 완벽히 파악(R² $\approx$ 1.0), 일부 변수는 미시적 비선형성을 가져 AI가 경향성은 알겠는데 완벽한 수식은 못 찾았다.   
@@ -297,14 +297,15 @@ T_Tip_Peel (주황색 넓은 산): 불확실성($\sigma$)이 우측으로 넓게
 이 주황색 넓은 산(높은 $\sigma$)의 존재를 확인했기 때문에, Step 5 유전 알고리즘에서 목적함수 + 2$\sigma$라는 강건 최적화를 적용하게 되었습니다.
 
 <img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/c37d49ae-934f-497d-ab4b-6036d4d17fd9" />
-PR + ARD 커널 + LHS의 증강 데이터 품질 검증
+<Fig 8. GPR + ARD 커널 + LHS의 증강 데이터 품질 검증>
 
 <img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/7b8faaa1-8cd5-4dda-93c1-e3d488072dc2" />
-XGboost + LHS의 증강 데이터 품질 검증
+<Fig 9. XGboost + LHS의 증강 데이터 품질 검증>
 
 <img width="2151" height="1012" alt="image" src="https://github.com/user-attachments/assets/69e8cc62-8f35-43f0-8378-e0653f425217" />
-Tabular Resnet + Bayesian Optimization의 증강 데이터 품질 검증
+<Fig 10. Tabular Resnet + Bayesian Optimization의 증강 데이터 품질 검증>
 
+x축은 예측된 물리량, Y축 데이터 빈도수
 LHS의 경우 골고루 데이터를 난수화 하다보니 극단 적인 형상도 포함 되어 양 끝단 뿔 형상이 warpmax 그래프에서 확인이 가능하다. 
 XGBoost경우 트리 기반 모델의 특성으로 뿔 형상이 강화된다.
 Bayesian Optimization은 최적화 과정이 포함되기 대문에 최적 조건에 몰리는  형상을 확인 가능하다.
@@ -314,30 +315,83 @@ Bayesian Optimization은 최적화 과정이 포함되기 대문에 최적 조�
 **Random Forest** (n_estimators=300, max_depth=7, class_weight='balanced')를 통해 분류된 결측치 생성 예측 데이터는 제거한다. -> 결과 20% 제거
 
 <img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/75bec92a-f98c-488a-b001-12bc2c67c2dc" />
-gpr의 분류기 이후 증강 데이터 성능 비교 (max peak)
+<Fig 11. gpr의 분류기 이후 증강 데이터 성능 비교 (max peak)>
 
 분류기 이후 warpmax의 양 뿔 형상이 제거된 것을 확인 할수 있다. 
 XGBoost의 경우 뿔 형상의 비중이 높아 분류기로 완전히 제거되지 않았다.
 
 ### Step 3: 파레토 프론티어 (Pareto Frontier) 타겟 곡선 추출
 
-위에서 선택한 R2 score가 높은 핵심 7개 변수만 추출하여 유토피아 텐서를 생성한다. 
+<img width="1071" height="711" alt="image" src="https://github.com/user-attachments/assets/32b5ef4c-f8f1-4652-9824-258697fccffa" />
+<Fig 12. 파레토 프론티어 warpmax(휘어짐) vs T_tip_peel(박리)>
+
+위에서 선택한 R2 score가 높은 핵심 7개 변수만 추출하여 유토피아 텐서를 생성한다.
+유토피아 텐서란 **"현실에는 존재할 수 없는 완벽한 이상향의 물리적 상태"**를 수학적으로 정의한 텐서이고
 Step 4 역설계 모델(1D-CNN)의 입력 텐서로써 사용이 된다. 
+그러나 이 과정에서 물리적으로 모순된 치수 조합이 나올수 있기 때문에 step 5에서 미세튜닝 작업을 거쳐야합니다.
 
 ### Step 4: 딥러닝 기반 역설계 (Inverse Design) 초안 출력
+Step 3에서 생성된 유토피아 타겟 텐서(7채널 × 617 timestep)를 입력하면,
+이를 구현할 수 있는 **최적의 P1~P6 설계변수 초안**을 출력하는 과정입니다. 
+
+원본 시계열에 **사비츠키-골레이 필터**로 메쉬 노이즈를 제거한 뒤, **ResNet 잔차 연결 + U-Net Skip Connection** 구조의 오토인코더가 7채널×600 timestep을 32차원 잠재 벡터로 압축한다.
+학습 시 **Smooth L1 + TV Loss**로 계단 경계의 깁스 현상과 평탄 구간 잔물결을 동시에 억제하며, **지도형 오토인코더(Supervised AE)**가 잠재 벡터에 P1~P6 정보를 강제 주입하여 U-Net의 정보 우회 현상을 방지한다.
+최종적으로 유토피아 타겟 텐서를 학습된 Encoder로 압축한 뒤, MLP 역매핑이 잠재 벡터로부터 P1~P6 설계변수 초안을 도출하여 Step 5 NSGA-II의 시작점으로 전달한다.
+pymoo는 NSGA-II의 진화 루프 + 제약조건 처리 + 비지배 정렬을 패키지화한 라이브러리입니다.
+
+위 기법들은 원본 데이터의 노이즈를 제거하고 오토인코더 복원의 깁스 현상 (없던 노이즈를 생성), 언더피팅등을 방지 하기위해 적용된 것들이다.
+
+<img width="2149" height="471" alt="image" src="https://github.com/user-attachments/assets/314594d4-3785-4698-ba67-6f9be368964b" />
+<Fig 13. 오토인코더 학습 곡선, 복원 품질, 잠재 공간 시각화>
+
+오토인코더의 학습 곡선을 보면 train loss는 0.02 가까이 수렴하는 것을 확인할수 있다. val loss는 복원 오차 + 평탄화 + P예측 오차(Sup_Loss)를 모두 포함하기 때문에     
+잠재 변수 z(오토인코더로 압축된 단순 벡터)에서 P1~P6 6개의 물리 변수를 정확히 역추적하는 것 때문에 수치가 크지만 복원 오차 자체는 0.02에 근접하다.     
+복원 품질은 매우 우수한 결과가 나온 것을 볼수 있다.     
+세번째 그래프는 오토인코더의 잠재공간 시각화이다.    
+
+<img width="890" height="578" alt="복원 3" src="https://github.com/user-attachments/assets/12c30326-5918-4907-a117-798de7bf2aad" />
+<img width="885" height="587" alt="복원 2" src="https://github.com/user-attachments/assets/8723f966-fc7d-4a3d-b146-da41512d2bd6" />
+<img width="512" height="339" alt="복원 1" src="https://github.com/user-attachments/assets/b52c4437-9b7a-40d3-94d5-1dfcc585ec85" />
+<Fig 14. 오토인코더 복원 품질 그래프에서 원본 그래프의 3가지 타입>
+
+열팽창계수의 차이에 의해 두께 패러미터 조합별로 위로 휘거나 별로 휘지 않거나 아래로 휘는 3가지 패턴이 발생하고 스텝이 넘어갈때 CAE프로그램 해석에서 극단적인 조건 변화에 의한 노이즈가 발생하는것을 확인할수 있다.
+
+<img width="1673" height="948" alt="image" src="https://github.com/user-attachments/assets/099c9d4d-6b96-47c7-ac72-c0647ee6d445" />
+<Fig 15. 역매핑 성능 평가>
+
+역매핑(결과를 입력하면 원인을 도출해 내는 수학적 역추적 과정) 결과 우수한 선형 형태를 확인할수 있다. P6의 경우 스케일의 차이이고 수치를 보면 소수점 단위로 매우 밀착했음을 알수 있다.
+$y=x$ 그래프(대각선 점선)에 수렴한다는 것은 주문한 목표 성능(Target)"과 "AI가 역산출한 설계도로 확인한 실제 성능(Achieved)"이 오차 없이 일치함을 의미합니다.
 
 ### Step 5: 머신러닝 미세 튜닝 (Fine-tuning via GA & Penalty Limits)
 
+Step 4에서 도출된 P1~P6 초안을 바탕으로 **NSGA-II 유전 알고리즘**을 실행하여
+최종 최적 설계변수를 도출한다. 물리적 한계치(Limit)를 초과하는 설계는
+페널티로 즉시 도태시켜 안전한 최적해만 생존시킨다.
+
+1. 패러미터 별로 바운더리를 초과하지 않도록 클리핑 적용
+2. GPR 대리 모델로 나머지 응력을 예측하여 재료 한계치 초과 여부를 판정한다.
+한계치를 넘으면 Loss에 대형 페널티를 부여하여 해당 개체를 즉시 도태시킨다.
+3. WarpMax(휘어짐)과 T_Tip_Peel(박리)의 가중합을 최소화하는것이 목표
+
+<img width="2151" height="831" alt="image" src="https://github.com/user-attachments/assets/8235d7ea-a091-4cf4-872a-b6b56e016b60" />
+<Fig 16. top 5 최적 설계안>
+
+ Knee Point (추천, 최적 밸런스), WarpMax 최소 우선, T_Tip_Peel 최소 우선, 파레토 중간 트레이드오프, σ 총합 최소 (최고 신뢰도) 등 우선도에 따라 다양한 최적 설계 조건이 도출.
+
+ 이중 knee point(두 가지 목적 함수(예: X축=WarpMax, Y축=T_Tip_Peel)를 그래프로 그렸을 때, 곡선이 마치 사람의 '구부린 무릎'처럼 급격하게 꺾이는 지점) 수치를 최종 선택하였다.
+
+ 
 ### 12.2 최적 설계 전후 비교 
 
 ### 12.3 대리모델 성능평가
 
-### 12.4 ai모델 학습시 공학적 제한의 필요성 (수치와 현실의 차이)
-
-<img width="2561" height="1356" alt="directional deformation 300s" src="https://github.com/user-attachments/assets/6a82f511-8bd9-4321-964a-931ea8f12682" />
+### 12.4 ai모델 학습시 공학적 제한의 필요성 (미세 튜닝의 필요성)
 
 <img width="707" height="255" alt="결과 교차 검증" src="https://github.com/user-attachments/assets/7abdc6a5-a379-4bc9-a298-0a9c66aedb2f" />
+압도적으로 뛰어난 개선 품질
 
+<img width="2561" height="1356" alt="directional deformation 300s" src="https://github.com/user-attachments/assets/6a82f511-8bd9-4321-964a-931ea8f12682" />
+물리적 비현실적인 형상
 
 ## 13. 개선 방안
 
