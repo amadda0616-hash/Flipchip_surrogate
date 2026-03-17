@@ -412,7 +412,7 @@ Step 4에서 도출된 P1~P6 초안을 바탕으로 **NSGA-II 유전 알고리�
 
 <img width="719" height="236" alt="결과 교차 검증" src="https://github.com/user-attachments/assets/48fe6de2-326e-4f30-b3da-770ec55c66e8" />
 
-<img width="1046" height="336" alt="JMS결과 교차 검증" src="https://github.com/user-attachments/assets/aabb03d4-462e-4ca0-b6cc-118256385734" />
+<img width="719" height="236" alt="JMS결과 교차 검증" src="https://github.com/user-attachments/assets/aabb03d4-462e-4ca0-b6cc-118256385734" />
 
 <fig 18. Case B: GPR + ARD 커널 + LHS와 Case C: Tabular ResNet + Bayesian Optimization의 개선 전후 개선율>
 
