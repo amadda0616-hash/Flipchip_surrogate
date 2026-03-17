@@ -445,7 +445,7 @@ Step 4에서 도출된 P1~P6 초안을 바탕으로 **NSGA-II 유전 알고리�
 step 1에서 학습 시킨 대리모델의 성능이 어느정도 인지 실제 cae 프로그램 결과와 일치율을 비교해보았다.
 이는 대리모델 논문들에서도 자주 사용되는 성능 확인 방식이다.
 
-<img width="980" height="1489" alt="대리 모델 성능 결과" src="https://github.com/user-attachments/assets/1a63aaf5-7c4b-4f0c-8653-17f4c026a9f4" />
+<img width="600" height="1200" alt="대리 모델 성능 결과" src="https://github.com/user-attachments/assets/1a63aaf5-7c4b-4f0c-8653-17f4c026a9f4" />
 
 <fig 20. 대리모델 성능평가>
 
