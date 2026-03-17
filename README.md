@@ -409,10 +409,16 @@ Step 4에서 도출된 P1~P6 초안을 바탕으로 **NSGA-II 유전 알고리�
 ### 12.4 ai모델 학습시 공학적 제한의 필요성 (미세 튜닝의 필요성)
 
 <img width="707" height="255" alt="결과 교차 검증" src="https://github.com/user-attachments/assets/7abdc6a5-a379-4bc9-a298-0a9c66aedb2f" />
-압도적으로 뛰어난 개선 품질
+
+<Fig 18. 압도적으로 뛰어난 개선 품질>
 
 <img width="2561" height="1356" alt="directional deformation 300s" src="https://github.com/user-attachments/assets/6a82f511-8bd9-4321-964a-931ea8f12682" />
-물리적 비현실적인 형상
+
+<Fig 19. 물리적 비현실적인 형상>
+
+미세 튜닝에서 바운더리에 대한 클리핑이 적용 되지 않는다면 위 결과의 기판 두께 0.01mm같은 비현실적인 형상이 도출될수 있다.    
+단순 수치적으로는 최적의 결과를 도출했기 때문에 우수한 개선 결과를 보였다.
+현실적인 결과를 출력하도록 구체적인 제한이 필요하다.
 
 ## 13. 개선 방안
 
