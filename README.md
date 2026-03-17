@@ -274,14 +274,19 @@ f. 50개의 케이스를 1개의 배치로 총 24개의 배치를 해석한다. 
 ### Step 1: 대리 모델(Surrogate)을 통한 데이터 증강 (Data Augmentation)
 Case A : XGboost + LHS, Case B: GPR + ARD 커널 + LHS, Case C: Tabular ResNet + Bayesian Optimization 로 나누어 진행
 <img width="2151" height="1183" alt="image" src="https://github.com/user-attachments/assets/dc245223-a80f-4032-9c10-9664ab29fd98" />
+
  <Fig 5. Y 변수 피크값 분포 히스토그램>
+ 
 각 응력/변형 채널의 피크 분포를 확인하여 편향(skew)이나 이상치 진단
 
 <img width="1481" height="471" alt="image" src="https://github.com/user-attachments/assets/8a7445b0-93b0-4885-8f15-ebb9b120f678" />
+
 <Fig 6. 상관계수 히트맵>
+
 어떤 두께 변수(P)가 어떤 응력(Y)에 강하게 영향을 미치는지 파악
 
 <img width="2391" height="591" alt="image" src="https://github.com/user-attachments/assets/e6281223-8201-4bb3-b980-8f7a4dc5a2e8" />
+
 <Fig 7. GPR의 모델 성능 평가>
 
 [Graph A] 변수별 학습 성취도 (R²)
@@ -297,12 +302,15 @@ T_Tip_Peel (주황색 넓은 산): 불확실성($\sigma$)이 우측으로 넓게
 이 주황색 넓은 산(높은 $\sigma$)의 존재를 확인했기 때문에, Step 5 유전 알고리즘에서 목적함수 + 2$\sigma$라는 강건 최적화를 적용하게 되었습니다.
 
 <img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/c37d49ae-934f-497d-ab4b-6036d4d17fd9" />
+
 <Fig 8. GPR + ARD 커널 + LHS의 증강 데이터 품질 검증>
 
 <img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/7b8faaa1-8cd5-4dda-93c1-e3d488072dc2" />
+
 <Fig 9. XGboost + LHS의 증강 데이터 품질 검증>
 
 <img width="2151" height="1012" alt="image" src="https://github.com/user-attachments/assets/69e8cc62-8f35-43f0-8378-e0653f425217" />
+
 <Fig 10. Tabular Resnet + Bayesian Optimization의 증강 데이터 품질 검증>
 
 x축은 예측된 물리량, Y축 데이터 빈도수
@@ -315,6 +323,7 @@ Bayesian Optimization은 최적화 과정이 포함되기 대문에 최적 조�
 **Random Forest** (n_estimators=300, max_depth=7, class_weight='balanced')를 통해 분류된 결측치 생성 예측 데이터는 제거한다. -> 결과 20% 제거
 
 <img width="1911" height="948" alt="image" src="https://github.com/user-attachments/assets/75bec92a-f98c-488a-b001-12bc2c67c2dc" />
+
 <Fig 11. gpr의 분류기 이후 증강 데이터 성능 비교 (max peak)>
 
 분류기 이후 warpmax의 양 뿔 형상이 제거된 것을 확인 할수 있다. 
@@ -323,6 +332,7 @@ XGBoost의 경우 뿔 형상의 비중이 높아 분류기로 완전히 제거�
 ### Step 3: 파레토 프론티어 (Pareto Frontier) 타겟 곡선 추출
 
 <img width="1071" height="711" alt="image" src="https://github.com/user-attachments/assets/32b5ef4c-f8f1-4652-9824-258697fccffa" />
+
 <Fig 12. 파레토 프론티어 warpmax(휘어짐) vs T_tip_peel(박리)>
 
 위에서 선택한 R2 score가 높은 핵심 7개 변수만 추출하여 유토피아 텐서를 생성한다.
@@ -342,22 +352,32 @@ pymoo는 NSGA-II의 진화 루프 + 제약조건 처리 + 비지배 정렬을 �
 위 기법들은 원본 데이터의 노이즈를 제거하고 오토인코더 복원의 깁스 현상 (없던 노이즈를 생성), 언더피팅등을 방지 하기위해 적용된 것들이다.
 
 <img width="2149" height="471" alt="image" src="https://github.com/user-attachments/assets/314594d4-3785-4698-ba67-6f9be368964b" />
+
 <Fig 13. 오토인코더 학습 곡선, 복원 품질, 잠재 공간 시각화>
 
 오토인코더의 학습 곡선을 보면 train loss는 0.02 가까이 수렴하는 것을 확인할수 있다. val loss는 복원 오차 + 평탄화 + P예측 오차(Sup_Loss)를 모두 포함하기 때문에     
 잠재 변수 z(오토인코더로 압축된 단순 벡터)에서 P1~P6 6개의 물리 변수를 정확히 역추적하는 것 때문에 수치가 크지만 복원 오차 자체는 0.02에 근접하다.     
-복원 품질은 매우 우수한 결과가 나온 것을 볼수 있다.     
+아래 Tabular ResNet + Bayesian Optimization의 경우 복원 오차만 그래프에 반영해 train loss 보다 더 작은 수치로 수렴하는 것을 볼 수 있다.
+
+<img width="2151" height="471" alt="image" src="https://github.com/user-attachments/assets/9f9c675c-5095-4d7a-bd74-8706e07030df" />
+
+<Fig 14. Tabular + Bayesian 오토인코더 학습 곡선, 복원 품질, 잠재 공간 시각화>
+
+복원 품질은 매우 우수한 결과가 나온 것을 볼수 있다. 
+
 세번째 그래프는 오토인코더의 잠재공간 시각화이다.    
 
 <img width="512" height="339" alt="복원 3" src="https://github.com/user-attachments/assets/12c30326-5918-4907-a117-798de7bf2aad" />
 <img width="512" height="339" alt="복원 2" src="https://github.com/user-attachments/assets/8723f966-fc7d-4a3d-b146-da41512d2bd6" />
 <img width="512" height="339" alt="복원 1" src="https://github.com/user-attachments/assets/b52c4437-9b7a-40d3-94d5-1dfcc585ec85" />
-<Fig 14. 오토인코더 복원 품질 그래프에서 원본 그래프의 3가지 타입>
+
+<Fig 15. 오토인코더 복원 품질 그래프에서 원본 그래프의 3가지 타입>
 
 열팽창계수의 차이에 의해 두께 패러미터 조합별로 위로 휘거나 별로 휘지 않거나 아래로 휘는 3가지 패턴이 발생하고 스텝이 넘어갈때 CAE프로그램 해석에서 극단적인 조건 변화에 의한 노이즈가 발생하는것을 확인할수 있다.
 
 <img width="1673" height="948" alt="image" src="https://github.com/user-attachments/assets/099c9d4d-6b96-47c7-ac72-c0647ee6d445" />
-<Fig 15. 역매핑 성능 평가>
+
+<Fig 16. 역매핑 성능 평가>
 
 역매핑(결과를 입력하면 원인을 도출해 내는 수학적 역추적 과정) 결과 우수한 선형 형태를 확인할수 있다. P6의 경우 스케일의 차이이고 수치를 보면 소수점 단위로 매우 밀착했음을 알수 있다.
 $y=x$ 그래프(대각선 점선)에 수렴한다는 것은 주문한 목표 성능(Target)"과 "AI가 역산출한 설계도로 확인한 실제 성능(Achieved)"이 오차 없이 일치함을 의미합니다.
@@ -374,7 +394,8 @@ Step 4에서 도출된 P1~P6 초안을 바탕으로 **NSGA-II 유전 알고리�
 3. WarpMax(휘어짐)과 T_Tip_Peel(박리)의 가중합을 최소화하는것이 목표
 
 <img width="2151" height="831" alt="image" src="https://github.com/user-attachments/assets/8235d7ea-a091-4cf4-872a-b6b56e016b60" />
-<Fig 16. top 5 최적 설계안>
+
+<Fig 17. top 5 최적 설계안>
 
  Knee Point (추천, 최적 밸런스), WarpMax 최소 우선, T_Tip_Peel 최소 우선, 파레토 중간 트레이드오프, σ 총합 최소 (최고 신뢰도) 등 우선도에 따라 다양한 최적 설계 조건이 도출.
 
