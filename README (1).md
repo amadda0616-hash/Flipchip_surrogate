@@ -40,8 +40,7 @@
 
 ## 3. 대리 모델의 도입 (The "Surrogate Model" Concept)
 
-![05  대리 모델의 도입_2](https://github.com/user-attachments/assets/96a14396-a356-4238-b592-41d250841162)
-
+![05  대리 모델의 도입_2](https://cdn.discordapp.com/attachments/1480386986840953003/1483430010982502451/AOI_d_-SPkxBDBGGHUHhE-IvK0oHbBARAhYWQTRGYDPbLpR3r3btAoqcJh83oQapI01idqMJYN8jKGarVqS3tpIVMrwEmWw0HX75NORkcUEW5XQw0tldt_L5XuxoJLXRyHFQ-2GosB6inUEAUil_f0j2SFPEBOdZX-nnMu1Dxu9QoQ5ZnLnl8As1600-rj.png?ex=69ba8f5b&is=69b93ddb&hm=1b1f7c3b3543b9c944f76744854ca765d89ca8982398a84daa31dfd632378769&)
 이번 프로젝트의 핵심은 복잡하고 오래 걸리는 컴퓨터 시뮬레이션을 대신할 '대리 모델(Surrogate Model)'을 구축하는 것입니다.
 
 개념: 원래 설계가 잘 되었는지 확인하려면 컴퓨터가 아주 복잡한 물리 법칙을 하나하나 계산해야 합니다. 결과는 정확하지만 시간이 너무 오래 걸린다는 게 문제입니다. '대리 모델'은 이 복잡한 과정을 거치지 않고, 그동안의 데이터를 바탕으로 **"이런 설계라면 결과는 이렇게 나올 거야"**라고 결과를 즉시 예측하는 인공지능입니다.
